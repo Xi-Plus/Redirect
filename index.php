@@ -6,13 +6,15 @@
 <body>
 <center>
 <?php
+include("config.php");
 if(!isset($_GET["q"])){
 	echo "<h2>Not Given Web</h2>";
-}
-else if(!isset($redirect_list[$_GET["q"]])){
+}else if(!isset($redirect_list[$_GET["q"]])){
 	echo "<h2>Not Found</h2>";
 }else {
-	echo "<script>document.location='".$redirect_list[$_GET["q"]].$_GET["id"]."'</script>";
+	$url=$redirect_list[$_GET["q"]].$_GET["id"];
+	echo "<h2>Rredirect to ".$url."</h2>";
+	echo "<script>setTimeout(function(){document.location='".$url."';},3000)</script>";
 }
 ?>
 <hr>
