@@ -9,10 +9,10 @@ function get_redirect_url($url){
 	$res=new stdClass;
 	if($rurl!=""){
 		$res->success=true;
-		$res->url=urlencode($rurl);
+		$res->url=$rurl;
 	}else {
 		$res->success=false;
-		$res->url=urlencode($url);
+		$res->url=$url;
 	}
 	return $res;
 }
