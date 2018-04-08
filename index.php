@@ -7,10 +7,20 @@
 <center>
 <h1>Redirect</h1>
 <?php
+include(__DIR__."/../function/sql/sql.php");
 if(!isset($_GET["w"])){
-	echo "<h2>沒有給予網站</h2>";
-}else if(!isset($_GET["q"])){
-	echo "<h2>沒有給予參數</h2>";
+	$query=new query;
+	$query->dbname = "xiplus";
+	$query->table = "redirect";
+	$query->where = array(
+		array("text",$_GET["q"])
+	);
+	$row=fetchone(SELECT($query));
+	if(!$row)echo "<h2>找不到</h2>";
+	else{
+		echo "<h2>3秒後前往 <a href='".$row["url"]."'>".$row["url"]."</a></h2>";
+		echo "<script>setTimeout(function(){document.location='".$row["url"]."';},3000)</script>";
+	}
 }else {
 	$url="";
 	$q=explode(".",str_replace(array(",","-"),".",$_GET["q"]));
